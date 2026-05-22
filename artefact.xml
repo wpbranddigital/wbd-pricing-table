@@ -1,0 +1,2531 @@
+<?xml version="1.0"?><artefact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="artefact.xsd" name="Telex Pricing Table Block" slug="telex-pricing-table" type="code-package" schemaVersion="2">
+  <file path="readme.txt">
+    <description>This file contains the readme information for the block.</description>
+    <content><![CDATA[
+=== Telex Pricing Table Block ===
+
+Contributors:      WordPress Telex
+Tags:              block, pricing, table, plans, comparison
+Tested up to:      6.8
+Stable tag:        0.1.0
+License:           GPLv2 or later
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+A beautiful, fully customizable pricing table block for the WordPress block editor. Display your pricing plans side by side with features, buttons, and highlighted recommended plans.
+
+== Description ==
+
+Telex Pricing Table Block is a feature-rich pricing table block for the WordPress Gutenberg editor. Inspired by popular pricing table plugins, it allows you to create stunning pricing comparison tables directly within the block editor.
+
+**Key Features:**
+
+* **Multiple Pricing Plans** — Add up to 6 pricing plans displayed side by side in a responsive grid.
+* **Customizable Plan Details** — Set plan name, price, currency symbol, billing period, and description for each plan.
+* **Feature Lists** — Add unlimited features per plan with optional checkmark or cross icons to indicate included/excluded features.
+* **Call-to-Action Buttons** — Customize button text and URL for each plan with option to open links in a new tab.
+* **Featured/Recommended Plan** — Highlight a plan as "recommended" with a badge and visual emphasis.
+* **Color Customization** — Choose header background color, header text color, button color, button text color, and featured plan accent color.
+* **Layout Options** — Choose between 1 to 4 columns layout.
+* **Border Radius** — Control the roundness of the pricing cards.
+* **Hover Effects** — Smooth hover animations for an engaging user experience.
+* **Responsive Design** — Plans stack gracefully on smaller screens.
+* **Live Preview** — See all changes in real time within the editor.
+
+== Installation ==
+
+1. Upload the plugin files to the `/wp-content/plugins/telex-pricing-table` directory, or install the plugin through the WordPress plugins screen directly.
+2. Activate the plugin through the 'Plugins' screen in WordPress.
+3. In the block editor, search for "Pricing Table" and add the block to your page.
+
+== Frequently Asked Questions ==
+
+= How many plans can I add? =
+
+You can add up to 6 pricing plans in a single block.
+
+= Can I highlight a recommended plan? =
+
+Yes! Each plan has a "Featured" toggle that adds a visual badge and elevated styling.
+
+= Is the block responsive? =
+
+Yes, the pricing table is fully responsive and adapts to all screen sizes.
+
+== Screenshots ==
+
+1. Pricing table with three plans in the editor.
+2. Frontend display with featured/recommended plan highlighted.
+
+== Changelog ==
+
+= 0.1.0 =
+* Initial release with full pricing table functionality.
+]]></content>
+  </file>
+  <file path="telex-pricing-table.php">
+    <description>Main plugin file for the Telex Pricing Table Block.</description>
+    <content><![CDATA[<?php
+/**
+ * Plugin Name:       Telex Pricing Table Block
+ * Description:       A beautiful, fully customizable pricing table block with multiple plans, feature lists, CTA buttons, and featured plan highlighting.
+ * Version:           0.1.0
+ * Requires at least: 6.4
+ * Requires PHP:      7.4
+ * Author:            WordPress Telex
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       telex-pricing-table
+ *
+ * @package TelexPricingTable
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+if ( ! function_exists( 'telex_pricing_table_telex_pricing_table_block_init' ) ) {
+	function telex_pricing_table_telex_pricing_table_block_init() {
+		register_block_type( __DIR__ . '/build/' );
+	}
+}
+add_action( 'init', 'telex_pricing_table_telex_pricing_table_block_init' );
+]]></content>
+  </file>
+  <file path="src/block.json">
+    <description>Block metadata for the pricing table block.</description>
+    <content><![CDATA[
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "telex/block-telex-pricing-table",
+	"version": "0.1.0",
+	"title": "Telex Pricing Table Block",
+	"category": "widgets",
+	"icon": "editor-table",
+	"description": "A beautiful, fully customizable pricing table block with multiple plans, feature lists, CTA buttons, and featured plan highlighting.",
+	"example": {
+		"attributes": {
+			"plans": [
+				{
+					"name": "Basic",
+					"description": "For individuals",
+					"currency": "$",
+					"features": [
+						{ "text": "1 Website", "included": true },
+						{ "text": "10 GB Storage", "included": true },
+						{ "text": "Email Support", "included": true },
+						{ "text": "Priority Support", "included": false }
+					],
+					"buttonText": "Get Started",
+					"buttonUrl": "#",
+					"featured": false,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "9", "period": "/mo", "discount": "" },
+						"yearly": { "price": "86", "period": "/yr", "discount": "20" }
+					}
+				},
+				{
+					"name": "Pro",
+					"description": "For professionals",
+					"currency": "$",
+					"features": [
+						{ "text": "10 Websites", "included": true },
+						{ "text": "50 GB Storage", "included": true },
+						{ "text": "Email Support", "included": true },
+						{ "text": "Priority Support", "included": true }
+					],
+					"buttonText": "Get Started",
+					"buttonUrl": "#",
+					"featured": true,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "29", "period": "/mo", "discount": "" },
+						"yearly": { "price": "278", "period": "/yr", "discount": "20" }
+					}
+				},
+				{
+					"name": "Enterprise",
+					"description": "For large teams",
+					"currency": "$",
+					"features": [
+						{ "text": "Unlimited Websites", "included": true },
+						{ "text": "500 GB Storage", "included": true },
+						{ "text": "24/7 Support", "included": true },
+						{ "text": "Priority Support", "included": true }
+					],
+					"buttonText": "Contact Us",
+					"buttonUrl": "#",
+					"featured": false,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "99", "period": "/mo", "discount": "" },
+						"yearly": { "price": "950", "period": "/yr", "discount": "20" }
+					}
+				}
+			],
+			"columns": 3,
+			"showBillingToggle": true,
+			"billingOptions": [
+				{ "key": "monthly", "label": "Monthly" },
+				{ "key": "yearly", "label": "Yearly" }
+			],
+			"defaultBillingOption": "monthly"
+		}
+	},
+	"attributes": {
+		"plans": {
+			"type": "array",
+			"default": [
+				{
+					"name": "Basic",
+					"description": "Perfect for getting started",
+					"currency": "$",
+					"features": [
+						{ "text": "1 Website", "included": true },
+						{ "text": "10 GB Storage", "included": true },
+						{ "text": "Email Support", "included": true },
+						{ "text": "Priority Support", "included": false }
+					],
+					"buttonText": "Get Started",
+					"buttonUrl": "#",
+					"featured": false,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "9", "period": "/mo", "discount": "" },
+						"yearly": { "price": "86", "period": "/yr", "discount": "20" }
+					}
+				},
+				{
+					"name": "Pro",
+					"description": "Best for professionals",
+					"currency": "$",
+					"features": [
+						{ "text": "10 Websites", "included": true },
+						{ "text": "50 GB Storage", "included": true },
+						{ "text": "Email Support", "included": true },
+						{ "text": "Priority Support", "included": true }
+					],
+					"buttonText": "Get Started",
+					"buttonUrl": "#",
+					"featured": true,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "29", "period": "/mo", "discount": "" },
+						"yearly": { "price": "278", "period": "/yr", "discount": "20" }
+					}
+				},
+				{
+					"name": "Enterprise",
+					"description": "For large teams and businesses",
+					"currency": "$",
+					"features": [
+						{ "text": "Unlimited Websites", "included": true },
+						{ "text": "500 GB Storage", "included": true },
+						{ "text": "24/7 Phone Support", "included": true },
+						{ "text": "Dedicated Manager", "included": true }
+					],
+					"buttonText": "Contact Us",
+					"buttonUrl": "#",
+					"featured": false,
+					"openInNewTab": false,
+					"pricing": {
+						"monthly": { "price": "99", "period": "/mo", "discount": "" },
+						"yearly": { "price": "950", "period": "/yr", "discount": "20" }
+					}
+				}
+			]
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"showBillingToggle": {
+			"type": "boolean",
+			"default": true
+		},
+		"billingOptions": {
+			"type": "array",
+			"default": [
+				{ "key": "monthly", "label": "Monthly" },
+				{ "key": "yearly", "label": "Yearly" }
+			]
+		},
+		"defaultBillingOption": {
+			"type": "string",
+			"default": "monthly"
+		},
+		"headerBgColor": {
+			"type": "string",
+			"default": "#4a90d9"
+		},
+		"headerTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"buttonBgColor": {
+			"type": "string",
+			"default": "#4a90d9"
+		},
+		"buttonTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"featuredAccentColor": {
+			"type": "string",
+			"default": "#e85e5e"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 12
+		},
+		"featuredBadgeText": {
+			"type": "string",
+			"default": "Recommended"
+		},
+		"styleTheme": {
+			"type": "string",
+			"default": "default"
+		},
+		"layoutStyle": {
+			"type": "string",
+			"default": "classic"
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"textdomain": "telex-pricing-table",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
+]]></content>
+  </file>
+  <file path="src/index.js">
+    <description>Block registration file.</description>
+    <content><![CDATA[
+import { registerBlockType } from '@wordpress/blocks';
+import './style.scss';
+import Edit from './edit';
+import save from './save';
+import metadata from './block.json';
+
+registerBlockType( metadata.name, {
+	edit: Edit,
+	save,
+} );
+]]></content>
+  </file>
+  <file path="src/edit.js">
+    <description>Edit component for the pricing table block with full inspector controls.</description>
+    <content><![CDATA[
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	PanelBody,
+	PanelRow,
+	TextControl,
+	ToggleControl,
+	RangeControl,
+	Button,
+	ColorPicker,
+	ColorIndicator,
+	SelectControl,
+	__experimentalHStack as HStack,
+	__experimentalVStack as VStack,
+	TabPanel,
+} from '@wordpress/components';
+import { useState } from '@wordpress/element';
+import './editor.scss';
+
+export default function Edit( { attributes, setAttributes } ) {
+	const {
+		plans,
+		columns,
+		showBillingToggle,
+		billingOptions,
+		defaultBillingOption,
+		headerBgColor,
+		headerTextColor,
+		buttonBgColor,
+		buttonTextColor,
+		featuredAccentColor,
+		borderRadius,
+		styleTheme,
+		layoutStyle,
+	} = attributes;
+
+	const THEME_PRESETS = {
+		default: {
+			label: 'Default',
+			description: 'Clean blue and white design',
+			headerBgColor: '#4a90d9',
+			headerTextColor: '#ffffff',
+			buttonBgColor: '#4a90d9',
+			buttonTextColor: '#ffffff',
+			featuredAccentColor: '#e85e5e',
+		},
+		dark: {
+			label: 'Dark',
+			description: 'Dark cards with vibrant accents',
+			headerBgColor: '#1a1a2e',
+			headerTextColor: '#ffffff',
+			buttonBgColor: '#6c63ff',
+			buttonTextColor: '#ffffff',
+			featuredAccentColor: '#6c63ff',
+		},
+		gradient: {
+			label: 'Gradient',
+			description: 'Vibrant gradient headers',
+			headerBgColor: '#667eea',
+			headerTextColor: '#ffffff',
+			buttonBgColor: '#764ba2',
+			buttonTextColor: '#ffffff',
+			featuredAccentColor: '#f093fb',
+		},
+		minimal: {
+			label: 'Minimal',
+			description: 'Clean flat design with subtle tones',
+			headerBgColor: '#f7f8fc',
+			headerTextColor: '#2d3436',
+			buttonBgColor: '#2d3436',
+			buttonTextColor: '#ffffff',
+			featuredAccentColor: '#00b894',
+		},
+	};
+
+	const LAYOUT_OPTIONS = {
+		classic: {
+			label: 'Classic',
+			description: 'Header top, features middle, button bottom',
+			icon: '▦',
+		},
+		centered: {
+			label: 'Centered',
+			description: 'Circular price badge, centered content',
+			icon: '◉',
+		},
+		'side-accent': {
+			label: 'Side Accent',
+			description: 'Left color bar, compact inline layout',
+			icon: '▐',
+		},
+		'card-ribbon': {
+			label: 'Card Ribbon',
+			description: 'Feature tags, horizontal emphasis',
+			icon: '▤',
+		},
+	};
+
+	const applyThemePreset = ( themeKey ) => {
+		const preset = THEME_PRESETS[ themeKey ];
+		if ( ! preset ) return;
+		setAttributes( {
+			styleTheme: themeKey,
+			headerBgColor: preset.headerBgColor,
+			headerTextColor: preset.headerTextColor,
+			buttonBgColor: preset.buttonBgColor,
+			buttonTextColor: preset.buttonTextColor,
+			featuredAccentColor: preset.featuredAccentColor,
+		} );
+	};
+
+	const [ activePlanIndex, setActivePlanIndex ] = useState( 0 );
+	const [ previewBilling, setPreviewBilling ] = useState( defaultBillingOption || ( billingOptions[ 0 ] ? billingOptions[ 0 ].key : 'monthly' ) );
+
+	const updatePlan = ( index, key, value ) => {
+		const updated = plans.map( ( plan, i ) =>
+			i === index ? { ...plan, [ key ]: value } : plan
+		);
+		setAttributes( { plans: updated } );
+	};
+
+	const updatePlanPricing = ( planIndex, billingKey, field, value ) => {
+		const updated = plans.map( ( plan, i ) => {
+			if ( i !== planIndex ) return plan;
+			const pricing = { ...( plan.pricing || {} ) };
+			pricing[ billingKey ] = { ...( pricing[ billingKey ] || { price: '0', period: '', discount: '' } ), [ field ]: value };
+			return { ...plan, pricing };
+		} );
+		setAttributes( { plans: updated } );
+	};
+
+	const updateFeature = ( planIndex, featureIndex, key, value ) => {
+		const updated = plans.map( ( plan, pi ) => {
+			if ( pi !== planIndex ) return plan;
+			const features = plan.features.map( ( feat, fi ) =>
+				fi === featureIndex ? { ...feat, [ key ]: value } : feat
+			);
+			return { ...plan, features };
+		} );
+		setAttributes( { plans: updated } );
+	};
+
+	const addFeature = ( planIndex ) => {
+		const updated = plans.map( ( plan, i ) => {
+			if ( i !== planIndex ) return plan;
+			return {
+				...plan,
+				features: [
+					...plan.features,
+					{ text: __( 'New Feature', 'telex-pricing-table' ), included: true },
+				],
+			};
+		} );
+		setAttributes( { plans: updated } );
+	};
+
+	const removeFeature = ( planIndex, featureIndex ) => {
+		const updated = plans.map( ( plan, i ) => {
+			if ( i !== planIndex ) return plan;
+			return {
+				...plan,
+				features: plan.features.filter( ( _, fi ) => fi !== featureIndex ),
+			};
+		} );
+		setAttributes( { plans: updated } );
+	};
+
+	const addPlan = () => {
+		if ( plans.length >= 6 ) return;
+		const defaultPricing = {};
+		billingOptions.forEach( ( opt ) => {
+			defaultPricing[ opt.key ] = { price: '0', period: '', discount: '' };
+		} );
+		const newPlan = {
+			name: __( 'New Plan', 'telex-pricing-table' ),
+			currency: '$',
+			description: '',
+			features: [
+				{ text: __( 'Feature 1', 'telex-pricing-table' ), included: true },
+			],
+			buttonText: __( 'Get Started', 'telex-pricing-table' ),
+			buttonUrl: '#',
+			featured: false,
+			openInNewTab: false,
+			pricing: defaultPricing,
+		};
+		setAttributes( { plans: [ ...plans, newPlan ] } );
+		setActivePlanIndex( plans.length );
+	};
+
+	const removePlan = ( index ) => {
+		if ( plans.length <= 1 ) return;
+		const updated = plans.filter( ( _, i ) => i !== index );
+		setAttributes( { plans: updated } );
+		if ( activePlanIndex >= updated.length ) {
+			setActivePlanIndex( Math.max( 0, updated.length - 1 ) );
+		}
+	};
+
+	const generateKey = ( label ) => {
+		return label
+			.toLowerCase()
+			.replace( /[^a-z0-9]+/g, '-' )
+			.replace( /^-|-$/g, '' ) || 'option-' + Date.now();
+	};
+
+	const addBillingOption = () => {
+		const newLabel = __( 'New Option', 'telex-pricing-table' );
+		const newKey = generateKey( newLabel ) + '-' + billingOptions.length;
+		const updatedOptions = [ ...billingOptions, { key: newKey, label: newLabel } ];
+		setAttributes( { billingOptions: updatedOptions } );
+
+		const updatedPlans = plans.map( ( plan ) => {
+			const pricing = { ...( plan.pricing || {} ) };
+			pricing[ newKey ] = { price: '0', period: '', discount: '' };
+			return { ...plan, pricing };
+		} );
+		setAttributes( { plans: updatedPlans } );
+	};
+
+	const removeBillingOption = ( index ) => {
+		if ( billingOptions.length <= 1 ) return;
+		const removedKey = billingOptions[ index ].key;
+		const updatedOptions = billingOptions.filter( ( _, i ) => i !== index );
+		setAttributes( { billingOptions: updatedOptions } );
+
+		if ( defaultBillingOption === removedKey ) {
+			setAttributes( { defaultBillingOption: updatedOptions[ 0 ].key } );
+		}
+		if ( previewBilling === removedKey ) {
+			setPreviewBilling( updatedOptions[ 0 ].key );
+		}
+
+		const updatedPlans = plans.map( ( plan ) => {
+			const pricing = { ...( plan.pricing || {} ) };
+			delete pricing[ removedKey ];
+			return { ...plan, pricing };
+		} );
+		setAttributes( { plans: updatedPlans } );
+	};
+
+	const updateBillingOptionLabel = ( index, newLabel ) => {
+		const updatedOptions = billingOptions.map( ( opt, i ) =>
+			i === index ? { ...opt, label: newLabel } : opt
+		);
+		setAttributes( { billingOptions: updatedOptions } );
+	};
+
+	const getActivePricing = ( plan ) => {
+		if ( ! plan.pricing || ! plan.pricing[ previewBilling ] ) {
+			return { price: plan.price || '0', period: plan.period || '', discount: '' };
+		}
+		return plan.pricing[ previewBilling ];
+	};
+
+	const blockProps = useBlockProps( {
+		className: `telex-pricing-table-wrapper telex-theme-${ styleTheme || 'default' } telex-layout-${ layoutStyle || 'classic' }`,
+	} );
+
+	const planTabs = plans.map( ( plan, index ) => ( {
+		name: `plan-${ index }`,
+		title: plan.name || `Plan ${ index + 1 }`,
+	} ) );
+
+	const getPlanBadgeText = ( plan ) => {
+		return plan.featuredBadgeText || attributes.featuredBadgeText || __( 'Recommended', 'telex-pricing-table' );
+	};
+
+	const renderClassicCard = ( plan, index ) => {
+		const cardBorderColor = plan.featured ? featuredAccentColor : 'transparent';
+		const activePricing = getActivePricing( plan );
+		const displayPrice = activePricing.price || '0';
+		const displayPeriod = activePricing.period || '';
+		const showDiscount = activePricing.discount && activePricing.discount !== '';
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ {
+					borderRadius: `${ borderRadius }px`,
+					borderColor: cardBorderColor,
+				} }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div
+					className="telex-pricing-header"
+					style={ {
+						backgroundColor: plan.featured ? featuredAccentColor : headerBgColor,
+						color: headerTextColor,
+						borderRadius: `${ borderRadius }px ${ borderRadius }px 0 0`,
+					} }
+				>
+					<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+					{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+				</div>
+				<div className="telex-pricing-price-area">
+					{ showDiscount && (
+						<span className="telex-pricing-discount-badge">
+							{ activePricing.discount }% { __( 'OFF', 'telex-pricing-table' ) }
+						</span>
+					) }
+					<div className="telex-pricing-price-row">
+						<span className="telex-pricing-currency">{ plan.currency }</span>
+						<span className="telex-pricing-amount">{ displayPrice }</span>
+						<span className="telex-pricing-period">{ displayPeriod }</span>
+					</div>
+				</div>
+				<ul className="telex-pricing-features">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<span
+						className="telex-pricing-button"
+						style={ {
+							backgroundColor: plan.featured ? featuredAccentColor : buttonBgColor,
+							color: buttonTextColor,
+							borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px`,
+						} }
+					>
+						{ plan.buttonText }
+					</span>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCenteredCard = ( plan, index ) => {
+		const activePricing = getActivePricing( plan );
+		const displayPrice = activePricing.price || '0';
+		const displayPeriod = activePricing.period || '';
+		const showDiscount = activePricing.discount && activePricing.discount !== '';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--centered${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px` } }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-centered-top">
+					<h3 className="telex-pricing-plan-name" style={ { color: accentColor } }>{ plan.name }</h3>
+					{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+				</div>
+				<div className="telex-centered-price-circle" style={ { borderColor: accentColor } }>
+					{ showDiscount && (
+						<span className="telex-pricing-discount-badge">
+							{ activePricing.discount }%
+						</span>
+					) }
+					<span className="telex-pricing-currency">{ plan.currency }</span>
+					<span className="telex-pricing-amount">{ displayPrice }</span>
+					<span className="telex-pricing-period">{ displayPeriod }</span>
+				</div>
+				<ul className="telex-pricing-features telex-pricing-features--centered">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<span
+						className="telex-pricing-button telex-pricing-button--pill"
+						style={ {
+							backgroundColor: accentColor,
+							color: buttonTextColor,
+						} }
+					>
+						{ plan.buttonText }
+					</span>
+				</div>
+			</div>
+		);
+	};
+
+	const renderSideAccentCard = ( plan, index ) => {
+		const activePricing = getActivePricing( plan );
+		const displayPrice = activePricing.price || '0';
+		const displayPeriod = activePricing.period || '';
+		const showDiscount = activePricing.discount && activePricing.discount !== '';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--side-accent${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px`, borderLeftColor: accentColor } }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-side-accent-header">
+					<div className="telex-side-accent-title-area">
+						<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+						{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+					</div>
+					<div className="telex-side-accent-price-area">
+						{ showDiscount && (
+							<span className="telex-pricing-discount-badge">
+								{ activePricing.discount }% { __( 'OFF', 'telex-pricing-table' ) }
+							</span>
+						) }
+						<div className="telex-pricing-price-row">
+							<span className="telex-pricing-currency">{ plan.currency }</span>
+							<span className="telex-pricing-amount">{ displayPrice }</span>
+							<span className="telex-pricing-period">{ displayPeriod }</span>
+						</div>
+					</div>
+				</div>
+				<div className="telex-side-accent-divider" style={ { backgroundColor: accentColor } }></div>
+				<ul className="telex-pricing-features">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' } style={ feature.included ? { color: accentColor, backgroundColor: accentColor + '18' } : {} }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<span
+						className="telex-pricing-button telex-pricing-button--outline"
+						style={ {
+							borderColor: accentColor,
+							color: accentColor,
+							borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px`,
+						} }
+					>
+						{ plan.buttonText }
+					</span>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCardRibbonCard = ( plan, index ) => {
+		const activePricing = getActivePricing( plan );
+		const displayPrice = activePricing.price || '0';
+		const displayPeriod = activePricing.period || '';
+		const showDiscount = activePricing.discount && activePricing.discount !== '';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--ribbon${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px` } }
+			>
+				{ plan.featured && (
+					<div className="telex-ribbon-tag" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-ribbon-top-bar" style={ { backgroundColor: accentColor } }></div>
+				<div className="telex-ribbon-content">
+					<div className="telex-ribbon-plan-info">
+						<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+						{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+						<div className="telex-ribbon-price">
+							{ showDiscount && (
+								<span className="telex-pricing-discount-badge telex-pricing-discount-badge--small">
+									-{ activePricing.discount }%
+								</span>
+							) }
+							<span className="telex-pricing-currency">{ plan.currency }</span>
+							<span className="telex-pricing-amount">{ displayPrice }</span>
+							<span className="telex-pricing-period">{ displayPeriod }</span>
+						</div>
+					</div>
+					<div className="telex-ribbon-features-tags">
+						{ plan.features.map( ( feature, fi ) => (
+							<span
+								key={ fi }
+								className={ `telex-ribbon-tag-item${ ! feature.included ? ' telex-ribbon-tag-item--excluded' : '' }` }
+								style={ feature.included ? { borderColor: accentColor, color: accentColor } : {} }
+							>
+								{ feature.included ? '\u2713' : '\u2715' } { feature.text }
+							</span>
+						) ) }
+					</div>
+					<div className="telex-pricing-button-area telex-pricing-button-area--ribbon">
+						<span
+							className="telex-pricing-button telex-pricing-button--wide"
+							style={ {
+								backgroundColor: accentColor,
+								color: buttonTextColor,
+								borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px`,
+							} }
+						>
+							{ plan.buttonText } &rarr;
+						</span>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCard = ( plan, index ) => {
+		switch ( layoutStyle ) {
+			case 'centered':
+				return renderCenteredCard( plan, index );
+			case 'side-accent':
+				return renderSideAccentCard( plan, index );
+			case 'card-ribbon':
+				return renderCardRibbonCard( plan, index );
+			default:
+				return renderClassicCard( plan, index );
+		}
+	};
+
+	return (
+		<>
+			<InspectorControls>
+				<PanelBody title={ __( 'Layout Style', 'telex-pricing-table' ) } initialOpen={ true }>
+					<div className="telex-layout-selector">
+						{ Object.entries( LAYOUT_OPTIONS ).map( ( [ key, opt ] ) => (
+							<button
+								key={ key }
+								type="button"
+								className={ `telex-layout-option${ layoutStyle === key ? ' telex-layout-option--active' : '' }` }
+								onClick={ () => setAttributes( { layoutStyle: key } ) }
+								style={ {
+									display: 'flex',
+									alignItems: 'center',
+									gap: '10px',
+									width: '100%',
+									padding: '12px',
+									marginBottom: '8px',
+									border: layoutStyle === key ? '2px solid #007cba' : '2px solid #ddd',
+									borderRadius: '8px',
+									background: layoutStyle === key ? '#f0f7ff' : '#fff',
+									cursor: 'pointer',
+									textAlign: 'left',
+								} }
+							>
+								<span style={ { fontSize: '24px', lineHeight: 1 } }>{ opt.icon }</span>
+								<div>
+									<strong style={ { fontSize: '13px', color: '#1e1e1e', display: 'block' } }>{ opt.label }</strong>
+									<span style={ { fontSize: '11px', color: '#757575' } }>{ opt.description }</span>
+								</div>
+							</button>
+						) ) }
+					</div>
+				</PanelBody>
+				<PanelBody title={ __( 'Style Theme', 'telex-pricing-table' ) } initialOpen={ false }>
+					<div className="telex-theme-selector">
+						{ Object.entries( THEME_PRESETS ).map( ( [ key, preset ] ) => (
+							<button
+								key={ key }
+								type="button"
+								className={ `telex-theme-option${ styleTheme === key ? ' telex-theme-option--active' : '' }` }
+								onClick={ () => applyThemePreset( key ) }
+								style={ { display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', padding: '12px', marginBottom: '8px', border: styleTheme === key ? '2px solid #007cba' : '2px solid #ddd', borderRadius: '8px', background: styleTheme === key ? '#f0f7ff' : '#fff', cursor: 'pointer', textAlign: 'left' } }
+							>
+								<div style={ { display: 'flex', gap: '6px', marginBottom: '6px' } }>
+									<span style={ { width: '20px', height: '20px', borderRadius: '50%', background: preset.headerBgColor, border: '1px solid #ccc', display: 'inline-block' } }></span>
+									<span style={ { width: '20px', height: '20px', borderRadius: '50%', background: preset.buttonBgColor, border: '1px solid #ccc', display: 'inline-block' } }></span>
+									<span style={ { width: '20px', height: '20px', borderRadius: '50%', background: preset.featuredAccentColor, border: '1px solid #ccc', display: 'inline-block' } }></span>
+								</div>
+								<strong style={ { fontSize: '13px', color: '#1e1e1e' } }>{ preset.label }</strong>
+								<span style={ { fontSize: '11px', color: '#757575' } }>{ preset.description }</span>
+							</button>
+						) ) }
+					</div>
+				</PanelBody>
+				<PanelBody title={ __( 'Billing Toggle', 'telex-pricing-table' ) } initialOpen={ false }>
+					<ToggleControl
+						label={ __( 'Show Billing Toggle', 'telex-pricing-table' ) }
+						checked={ showBillingToggle }
+						onChange={ ( val ) => setAttributes( { showBillingToggle: val } ) }
+					/>
+					{ showBillingToggle && (
+						<VStack spacing={ 3 } style={ { marginTop: '12px' } }>
+							<strong>{ __( 'Toggle Options', 'telex-pricing-table' ) }</strong>
+							{ billingOptions.map( ( opt, i ) => (
+								<HStack key={ opt.key } alignment="center">
+									<TextControl
+										value={ opt.label }
+										onChange={ ( val ) => updateBillingOptionLabel( i, val ) }
+										style={ { flex: 1 } }
+										__nextHasNoMarginBottom
+									/>
+									{ billingOptions.length > 1 && (
+										<Button
+											isDestructive
+											variant="tertiary"
+											onClick={ () => removeBillingOption( i ) }
+											size="small"
+										>
+											✕
+										</Button>
+									) }
+								</HStack>
+							) ) }
+							<Button variant="secondary" onClick={ addBillingOption } size="small">
+								{ __( '+ Add Toggle Option', 'telex-pricing-table' ) }
+							</Button>
+							<SelectControl
+								label={ __( 'Default Active Option', 'telex-pricing-table' ) }
+								value={ defaultBillingOption }
+								options={ billingOptions.map( ( opt ) => ( {
+									label: opt.label,
+									value: opt.key,
+								} ) ) }
+								onChange={ ( val ) => setAttributes( { defaultBillingOption: val } ) }
+								__nextHasNoMarginBottom
+							/>
+						</VStack>
+					) }
+				</PanelBody>
+				<PanelBody title={ __( 'Layout Settings', 'telex-pricing-table' ) } initialOpen={ false }>
+					<RangeControl
+						label={ __( 'Columns', 'telex-pricing-table' ) }
+						value={ columns }
+						onChange={ ( val ) => setAttributes( { columns: val } ) }
+						min={ 1 }
+						max={ 4 }
+					/>
+					<RangeControl
+						label={ __( 'Border Radius', 'telex-pricing-table' ) }
+						value={ borderRadius }
+						onChange={ ( val ) => setAttributes( { borderRadius: val } ) }
+						min={ 0 }
+						max={ 30 }
+					/>
+				</PanelBody>
+				<PanelBody title={ __( 'Color Settings', 'telex-pricing-table' ) } initialOpen={ false }>
+					<VStack spacing={ 4 }>
+						<div>
+							<HStack>
+								<span>{ __( 'Header Background', 'telex-pricing-table' ) }</span>
+								<ColorIndicator colorValue={ headerBgColor } />
+							</HStack>
+							<ColorPicker color={ headerBgColor } onChange={ ( val ) => setAttributes( { headerBgColor: val } ) } enableAlpha={ false } />
+						</div>
+						<div>
+							<HStack>
+								<span>{ __( 'Header Text', 'telex-pricing-table' ) }</span>
+								<ColorIndicator colorValue={ headerTextColor } />
+							</HStack>
+							<ColorPicker color={ headerTextColor } onChange={ ( val ) => setAttributes( { headerTextColor: val } ) } enableAlpha={ false } />
+						</div>
+						<div>
+							<HStack>
+								<span>{ __( 'Button Background', 'telex-pricing-table' ) }</span>
+								<ColorIndicator colorValue={ buttonBgColor } />
+							</HStack>
+							<ColorPicker color={ buttonBgColor } onChange={ ( val ) => setAttributes( { buttonBgColor: val } ) } enableAlpha={ false } />
+						</div>
+						<div>
+							<HStack>
+								<span>{ __( 'Button Text', 'telex-pricing-table' ) }</span>
+								<ColorIndicator colorValue={ buttonTextColor } />
+							</HStack>
+							<ColorPicker color={ buttonTextColor } onChange={ ( val ) => setAttributes( { buttonTextColor: val } ) } enableAlpha={ false } />
+						</div>
+						<div>
+							<HStack>
+								<span>{ __( 'Featured Accent', 'telex-pricing-table' ) }</span>
+								<ColorIndicator colorValue={ featuredAccentColor } />
+							</HStack>
+							<ColorPicker color={ featuredAccentColor } onChange={ ( val ) => setAttributes( { featuredAccentColor: val } ) } enableAlpha={ false } />
+						</div>
+					</VStack>
+				</PanelBody>
+				<PanelBody title={ __( 'Plans', 'telex-pricing-table' ) } initialOpen={ true }>
+					{ plans.length < 6 && (
+						<PanelRow>
+							<Button variant="secondary" onClick={ addPlan }>
+								{ __( '+ Add Plan', 'telex-pricing-table' ) }
+							</Button>
+						</PanelRow>
+					) }
+					{ planTabs.length > 0 && (
+						<TabPanel
+							tabs={ planTabs }
+							onSelect={ ( tabName ) => {
+								const idx = parseInt( tabName.replace( 'plan-', '' ), 10 );
+								setActivePlanIndex( idx );
+							} }
+						>
+							{ () => {
+								const idx = activePlanIndex;
+								const plan = plans[ idx ];
+								if ( ! plan ) return null;
+								return (
+									<VStack spacing={ 3 } style={ { paddingTop: '12px' } }>
+										<TextControl label={ __( 'Plan Name', 'telex-pricing-table' ) } value={ plan.name } onChange={ ( val ) => updatePlan( idx, 'name', val ) } />
+										<TextControl label={ __( 'Currency Symbol', 'telex-pricing-table' ) } value={ plan.currency } onChange={ ( val ) => updatePlan( idx, 'currency', val ) } style={ { width: '80px' } } />
+										<TextControl label={ __( 'Description', 'telex-pricing-table' ) } value={ plan.description } onChange={ ( val ) => updatePlan( idx, 'description', val ) } />
+										<div style={ { borderTop: '1px solid #ddd', paddingTop: '12px' } }>
+											<strong>{ __( 'Pricing per Toggle Option', 'telex-pricing-table' ) }</strong>
+											<VStack spacing={ 3 } style={ { marginTop: '8px' } }>
+												{ billingOptions.map( ( opt ) => {
+													const bp = ( plan.pricing && plan.pricing[ opt.key ] ) || { price: '0', period: '', discount: '' };
+													return (
+														<div key={ opt.key } style={ { padding: '10px', background: '#f9f9f9', borderRadius: '6px', border: '1px solid #e0e0e0' } }>
+															<strong style={ { display: 'block', marginBottom: '6px' } }>{ opt.label }</strong>
+															<HStack>
+																<TextControl label={ __( 'Price', 'telex-pricing-table' ) } value={ bp.price } onChange={ ( val ) => updatePlanPricing( idx, opt.key, 'price', val ) } __nextHasNoMarginBottom />
+																<TextControl label={ __( 'Period', 'telex-pricing-table' ) } value={ bp.period } onChange={ ( val ) => updatePlanPricing( idx, opt.key, 'period', val ) } style={ { width: '80px' } } __nextHasNoMarginBottom />
+															</HStack>
+															<TextControl label={ __( 'Discount % (e.g. 20)', 'telex-pricing-table' ) } value={ bp.discount || '' } onChange={ ( val ) => updatePlanPricing( idx, opt.key, 'discount', val ) } help={ __( 'Shown as a badge when this billing option is active.', 'telex-pricing-table' ) } />
+														</div>
+													);
+												} ) }
+											</VStack>
+										</div>
+										<ToggleControl label={ __( 'Featured Plan', 'telex-pricing-table' ) } checked={ plan.featured } onChange={ ( val ) => updatePlan( idx, 'featured', val ) } />
+										{ plan.featured && (
+											<TextControl
+												label={ __( 'Featured Badge Text', 'telex-pricing-table' ) }
+												value={ plan.featuredBadgeText || attributes.featuredBadgeText || __( 'Recommended', 'telex-pricing-table' ) }
+												onChange={ ( val ) => updatePlan( idx, 'featuredBadgeText', val ) }
+												help={ __( 'Custom text for the featured badge on this plan.', 'telex-pricing-table' ) }
+											/>
+										) }
+										<TextControl label={ __( 'Button Text', 'telex-pricing-table' ) } value={ plan.buttonText } onChange={ ( val ) => updatePlan( idx, 'buttonText', val ) } />
+										<TextControl label={ __( 'Button URL', 'telex-pricing-table' ) } value={ plan.buttonUrl } onChange={ ( val ) => updatePlan( idx, 'buttonUrl', val ) } />
+										<ToggleControl label={ __( 'Open in New Tab', 'telex-pricing-table' ) } checked={ plan.openInNewTab } onChange={ ( val ) => updatePlan( idx, 'openInNewTab', val ) } />
+										<div>
+											<strong>{ __( 'Features', 'telex-pricing-table' ) }</strong>
+											<VStack spacing={ 2 } style={ { marginTop: '8px' } }>
+												{ plan.features.map( ( feature, fi ) => (
+													<HStack key={ fi } alignment="center">
+														<TextControl value={ feature.text } onChange={ ( val ) => updateFeature( idx, fi, 'text', val ) } style={ { flex: 1 } } __nextHasNoMarginBottom />
+														<ToggleControl label={ __( 'Included', 'telex-pricing-table' ) } checked={ feature.included } onChange={ ( val ) => updateFeature( idx, fi, 'included', val ) } />
+														<Button isDestructive variant="tertiary" onClick={ () => removeFeature( idx, fi ) } size="small">✕</Button>
+													</HStack>
+												) ) }
+											</VStack>
+											<Button variant="tertiary" onClick={ () => addFeature( idx ) } style={ { marginTop: '8px' } }>
+												{ __( '+ Add Feature', 'telex-pricing-table' ) }
+											</Button>
+										</div>
+										{ plans.length > 1 && (
+											<Button isDestructive variant="secondary" onClick={ () => removePlan( idx ) } style={ { marginTop: '12px' } }>
+												{ __( 'Remove This Plan', 'telex-pricing-table' ) }
+											</Button>
+										) }
+									</VStack>
+								);
+							} }
+						</TabPanel>
+					) }
+				</PanelBody>
+			</InspectorControls>
+			<div { ...blockProps }>
+				{ showBillingToggle && billingOptions.length > 1 && (
+					<div className="telex-billing-toggle-wrapper">
+						{ billingOptions.map( ( opt ) => (
+							<button
+								key={ opt.key }
+								type="button"
+								className={ `telex-billing-option${ previewBilling === opt.key ? ' telex-billing-option--active' : '' }` }
+								onClick={ () => setPreviewBilling( opt.key ) }
+							>
+								{ opt.label }
+							</button>
+						) ) }
+					</div>
+				) }
+				<div
+					className="telex-pricing-table-grid"
+					style={ { gridTemplateColumns: `repeat(${ columns }, 1fr)` } }
+				>
+					{ plans.map( ( plan, index ) => renderCard( plan, index ) ) }
+				</div>
+			</div>
+		</>
+	);
+}
+]]></content>
+  </file>
+  <file path="src/save.js">
+    <description>Save component that renders the static frontend markup.</description>
+    <content><![CDATA[
+import { useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
+
+export default function save( { attributes } ) {
+	const {
+		plans,
+		columns,
+		showBillingToggle,
+		billingOptions,
+		defaultBillingOption,
+		headerBgColor,
+		headerTextColor,
+		buttonBgColor,
+		buttonTextColor,
+		featuredAccentColor,
+		borderRadius,
+		styleTheme,
+		layoutStyle,
+	} = attributes;
+
+	const defaultKey = defaultBillingOption || ( billingOptions[ 0 ] ? billingOptions[ 0 ].key : 'monthly' );
+	const layout = layoutStyle || 'classic';
+	const globalBadgeText = attributes.featuredBadgeText || __( 'Recommended', 'telex-pricing-table' );
+
+	const getPlanBadgeText = ( plan ) => {
+		return plan.featuredBadgeText || globalBadgeText;
+	};
+
+	const renderClassicCard = ( plan, index ) => {
+		const cardBorderColor = plan.featured ? featuredAccentColor : 'transparent';
+		const defaultPricing = ( plan.pricing && plan.pricing[ defaultKey ] ) || { price: '0', period: '', discount: '' };
+		const pricingDataAttr = plan.pricing ? JSON.stringify( plan.pricing ) : '{}';
+
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px`, borderColor: cardBorderColor } }
+				data-pricing={ pricingDataAttr }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div
+					className="telex-pricing-header"
+					style={ {
+						backgroundColor: plan.featured ? featuredAccentColor : headerBgColor,
+						color: headerTextColor,
+						borderRadius: `${ borderRadius }px ${ borderRadius }px 0 0`,
+					} }
+				>
+					<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+					{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+				</div>
+				<div className="telex-pricing-price-area">
+					<span className="telex-pricing-discount-badge" style={ { display: defaultPricing.discount ? '' : 'none' } }>
+						{ defaultPricing.discount ? defaultPricing.discount + '% ' : '' }
+						{ __( 'OFF', 'telex-pricing-table' ) }
+					</span>
+					<div className="telex-pricing-price-row">
+						<span className="telex-pricing-currency">{ plan.currency }</span>
+						<span className="telex-pricing-amount">{ defaultPricing.price }</span>
+						<span className="telex-pricing-period">{ defaultPricing.period }</span>
+					</div>
+				</div>
+				<ul className="telex-pricing-features">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<a
+						className="telex-pricing-button"
+						href={ plan.buttonUrl || '#' }
+						style={ {
+							backgroundColor: plan.featured ? featuredAccentColor : buttonBgColor,
+							color: buttonTextColor,
+							borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px`,
+						} }
+						{ ...( plan.openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {} ) }
+					>
+						{ plan.buttonText }
+					</a>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCenteredCard = ( plan, index ) => {
+		const defaultPricing = ( plan.pricing && plan.pricing[ defaultKey ] ) || { price: '0', period: '', discount: '' };
+		const pricingDataAttr = plan.pricing ? JSON.stringify( plan.pricing ) : '{}';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--centered${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px` } }
+				data-pricing={ pricingDataAttr }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-centered-top">
+					<h3 className="telex-pricing-plan-name" style={ { color: accentColor } }>{ plan.name }</h3>
+					{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+				</div>
+				<div className="telex-centered-price-circle" style={ { borderColor: accentColor } }>
+					<span className="telex-pricing-discount-badge" style={ { display: defaultPricing.discount ? '' : 'none' } }>
+						{ defaultPricing.discount ? defaultPricing.discount + '%' : '' }
+					</span>
+					<span className="telex-pricing-currency">{ plan.currency }</span>
+					<span className="telex-pricing-amount">{ defaultPricing.price }</span>
+					<span className="telex-pricing-period">{ defaultPricing.period }</span>
+				</div>
+				<ul className="telex-pricing-features telex-pricing-features--centered">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<a
+						className="telex-pricing-button telex-pricing-button--pill"
+						href={ plan.buttonUrl || '#' }
+						style={ { backgroundColor: accentColor, color: buttonTextColor } }
+						{ ...( plan.openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {} ) }
+					>
+						{ plan.buttonText }
+					</a>
+				</div>
+			</div>
+		);
+	};
+
+	const renderSideAccentCard = ( plan, index ) => {
+		const defaultPricing = ( plan.pricing && plan.pricing[ defaultKey ] ) || { price: '0', period: '', discount: '' };
+		const pricingDataAttr = plan.pricing ? JSON.stringify( plan.pricing ) : '{}';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--side-accent${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px`, borderLeftColor: accentColor } }
+				data-pricing={ pricingDataAttr }
+			>
+				{ plan.featured && (
+					<div className="telex-pricing-badge" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-side-accent-header">
+					<div className="telex-side-accent-title-area">
+						<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+						{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+					</div>
+					<div className="telex-side-accent-price-area">
+						<span className="telex-pricing-discount-badge" style={ { display: defaultPricing.discount ? '' : 'none' } }>
+							{ defaultPricing.discount ? defaultPricing.discount + '% ' : '' }
+							{ __( 'OFF', 'telex-pricing-table' ) }
+						</span>
+						<div className="telex-pricing-price-row">
+							<span className="telex-pricing-currency">{ plan.currency }</span>
+							<span className="telex-pricing-amount">{ defaultPricing.price }</span>
+							<span className="telex-pricing-period">{ defaultPricing.period }</span>
+						</div>
+					</div>
+				</div>
+				<div className="telex-side-accent-divider" style={ { backgroundColor: accentColor } }></div>
+				<ul className="telex-pricing-features">
+					{ plan.features.map( ( feature, fi ) => (
+						<li key={ fi } className={ `telex-pricing-feature${ ! feature.included ? ' telex-pricing-feature--excluded' : '' }` }>
+							<span className={ feature.included ? 'telex-feature-icon telex-feature-icon--check' : 'telex-feature-icon telex-feature-icon--cross' } style={ feature.included ? { color: accentColor, backgroundColor: accentColor + '18' } : {} }>
+								{ feature.included ? '\u2713' : '\u2715' }
+							</span>
+							{ feature.text }
+						</li>
+					) ) }
+				</ul>
+				<div className="telex-pricing-button-area">
+					<a
+						className="telex-pricing-button telex-pricing-button--outline"
+						href={ plan.buttonUrl || '#' }
+						style={ { borderColor: accentColor, color: accentColor, borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px` } }
+						{ ...( plan.openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {} ) }
+					>
+						{ plan.buttonText }
+					</a>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCardRibbonCard = ( plan, index ) => {
+		const defaultPricing = ( plan.pricing && plan.pricing[ defaultKey ] ) || { price: '0', period: '', discount: '' };
+		const pricingDataAttr = plan.pricing ? JSON.stringify( plan.pricing ) : '{}';
+		const accentColor = plan.featured ? featuredAccentColor : headerBgColor;
+
+		return (
+			<div
+				key={ index }
+				className={ `telex-pricing-card telex-pricing-card--ribbon${ plan.featured ? ' telex-pricing-card--featured' : '' }` }
+				style={ { borderRadius: `${ borderRadius }px` } }
+				data-pricing={ pricingDataAttr }
+			>
+				{ plan.featured && (
+					<div className="telex-ribbon-tag" style={ { backgroundColor: featuredAccentColor } }>
+						{ getPlanBadgeText( plan ) }
+					</div>
+				) }
+				<div className="telex-ribbon-top-bar" style={ { backgroundColor: accentColor } }></div>
+				<div className="telex-ribbon-content">
+					<div className="telex-ribbon-plan-info">
+						<h3 className="telex-pricing-plan-name">{ plan.name }</h3>
+						{ plan.description && <p className="telex-pricing-description">{ plan.description }</p> }
+						<div className="telex-ribbon-price">
+							<span className="telex-pricing-discount-badge telex-pricing-discount-badge--small" style={ { display: defaultPricing.discount ? '' : 'none' } }>
+								{ defaultPricing.discount ? '-' + defaultPricing.discount + '%' : '' }
+							</span>
+							<span className="telex-pricing-currency">{ plan.currency }</span>
+							<span className="telex-pricing-amount">{ defaultPricing.price }</span>
+							<span className="telex-pricing-period">{ defaultPricing.period }</span>
+						</div>
+					</div>
+					<div className="telex-ribbon-features-tags">
+						{ plan.features.map( ( feature, fi ) => (
+							<span
+								key={ fi }
+								className={ `telex-ribbon-tag-item${ ! feature.included ? ' telex-ribbon-tag-item--excluded' : '' }` }
+								style={ feature.included ? { borderColor: accentColor, color: accentColor } : {} }
+							>
+								{ feature.included ? '\u2713' : '\u2715' } { feature.text }
+							</span>
+						) ) }
+					</div>
+					<div className="telex-pricing-button-area telex-pricing-button-area--ribbon">
+						<a
+							className="telex-pricing-button telex-pricing-button--wide"
+							href={ plan.buttonUrl || '#' }
+							style={ {
+								backgroundColor: accentColor,
+								color: buttonTextColor,
+								borderRadius: `${ Math.max( borderRadius - 4, 4 ) }px`,
+							} }
+							{ ...( plan.openInNewTab ? { target: '_blank', rel: 'noopener noreferrer' } : {} ) }
+						>
+							{ plan.buttonText } →
+						</a>
+					</div>
+				</div>
+			</div>
+		);
+	};
+
+	const renderCard = ( plan, index ) => {
+		switch ( layout ) {
+			case 'centered':
+				return renderCenteredCard( plan, index );
+			case 'side-accent':
+				return renderSideAccentCard( plan, index );
+			case 'card-ribbon':
+				return renderCardRibbonCard( plan, index );
+			default:
+				return renderClassicCard( plan, index );
+		}
+	};
+
+	return (
+		<div { ...useBlockProps.save( { className: `telex-pricing-table-wrapper telex-theme-${ styleTheme || 'default' } telex-layout-${ layout }` } ) }>
+			{ showBillingToggle && billingOptions.length > 1 && (
+				<div className="telex-billing-toggle-wrapper">
+					{ billingOptions.map( ( opt ) => (
+						<button
+							key={ opt.key }
+							type="button"
+							className={ `telex-billing-option${ opt.key === defaultKey ? ' telex-billing-option--active' : '' }` }
+							data-billing={ opt.key }
+						>
+							{ opt.label }
+						</button>
+					) ) }
+				</div>
+			) }
+			<div
+				className="telex-pricing-table-grid"
+				style={ { gridTemplateColumns: `repeat(${ columns }, 1fr)` } }
+			>
+				{ plans.map( ( plan, index ) => renderCard( plan, index ) ) }
+			</div>
+		</div>
+	);
+}
+]]></content>
+  </file>
+  <file path="src/style.scss">
+    <description>Shared styles for both the editor and frontend.</description>
+    <content><![CDATA[
+.wp-block-telex-block-telex-pricing-table {
+	padding: 0;
+	background: transparent;
+	color: inherit;
+}
+
+.telex-pricing-table-wrapper {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.telex-billing-toggle-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0;
+	margin-bottom: 32px;
+	background: #f0f0f0;
+	border-radius: 50px;
+	padding: 4px;
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.telex-billing-option {
+	padding: 10px 28px;
+	border: none;
+	background: transparent;
+	font-size: 14px;
+	font-weight: 600;
+	color: #666;
+	cursor: pointer;
+	border-radius: 50px;
+	transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+	line-height: 1.4;
+	white-space: nowrap;
+}
+
+.telex-billing-option:hover {
+	color: #333;
+}
+
+.telex-billing-option--active {
+	background: #ffffff;
+	color: #222;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.telex-pricing-table-grid {
+	display: grid;
+	gap: 24px;
+	align-items: start;
+}
+
+/* ========================================
+   LAYOUT: Classic (default)
+   ======================================== */
+.telex-pricing-card {
+	position: relative;
+	background: #ffffff;
+	border: 2px solid transparent;
+	overflow: visible;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.telex-pricing-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+}
+
+.telex-pricing-card--featured {
+	transform: scale(1.04);
+	box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+	z-index: 1;
+}
+
+.telex-pricing-card--featured:hover {
+	transform: scale(1.04) translateY(-4px);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.telex-pricing-badge {
+	position: absolute;
+	top: -14px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: #ffffff;
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 4px 18px;
+	border-radius: 20px;
+	white-space: nowrap;
+	z-index: 2;
+}
+
+.telex-pricing-header {
+	padding: 28px 20px 18px;
+	text-align: center;
+}
+
+.telex-pricing-plan-name {
+	margin: 0 0 4px;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.3;
+	color: inherit;
+}
+
+.telex-pricing-description {
+	margin: 0;
+	font-size: 13px;
+	opacity: 0.85;
+	color: inherit;
+}
+
+.telex-pricing-price-area {
+	text-align: center;
+	padding: 24px 20px 16px;
+	position: relative;
+}
+
+.telex-pricing-price-row {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
+	gap: 2px;
+}
+
+.telex-pricing-discount-badge {
+	display: inline-block;
+	background: #27ae60;
+	color: #ffffff;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	padding: 3px 12px;
+	border-radius: 20px;
+	margin-bottom: 10px;
+}
+
+.telex-pricing-discount-badge--small {
+	font-size: 10px;
+	padding: 2px 8px;
+	margin-bottom: 6px;
+}
+
+.telex-pricing-currency {
+	font-size: 22px;
+	font-weight: 600;
+	color: #333;
+	align-self: flex-start;
+	margin-top: 8px;
+}
+
+.telex-pricing-amount {
+	font-size: 52px;
+	font-weight: 800;
+	color: #222;
+	line-height: 1;
+}
+
+.telex-pricing-period {
+	font-size: 15px;
+	color: #777;
+	font-weight: 400;
+}
+
+.telex-pricing-features {
+	list-style: none;
+	margin: 0;
+	padding: 0 24px 8px;
+	flex-grow: 1;
+}
+
+.telex-pricing-feature {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 0;
+	font-size: 14px;
+	color: #444;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.telex-pricing-feature:last-child {
+	border-bottom: none;
+}
+
+.telex-pricing-feature--excluded {
+	color: #aaa;
+	text-decoration: line-through;
+}
+
+.telex-feature-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	font-size: 13px;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.telex-feature-icon--check {
+	background: #e6f7ee;
+	color: #27ae60;
+}
+
+.telex-feature-icon--cross {
+	background: #fde8e8;
+	color: #d64545;
+}
+
+.telex-pricing-button-area {
+	padding: 16px 24px 28px;
+	text-align: center;
+}
+
+.telex-pricing-button {
+	display: inline-block;
+	padding: 12px 32px;
+	font-size: 15px;
+	font-weight: 700;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	transition: opacity 0.2s ease, transform 0.2s ease;
+	border: none;
+	min-width: 140px;
+}
+
+.telex-pricing-button:hover {
+	opacity: 0.88;
+	transform: translateY(-1px);
+}
+
+a.telex-pricing-button {
+	color: inherit;
+}
+
+/* ========================================
+   LAYOUT: Centered
+   ======================================== */
+.telex-pricing-card--centered {
+	text-align: center;
+	padding-top: 32px;
+	border: 2px solid #eee;
+}
+
+.telex-pricing-card--centered.telex-pricing-card--featured {
+	border-color: inherit;
+}
+
+.telex-centered-top {
+	padding: 0 24px 8px;
+}
+
+.telex-centered-top .telex-pricing-plan-name {
+	font-size: 24px;
+	margin-bottom: 6px;
+}
+
+.telex-centered-top .telex-pricing-description {
+	color: #888;
+	margin-bottom: 0;
+}
+
+.telex-centered-price-circle {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	border: 4px solid;
+	margin: 20px auto;
+	position: relative;
+	background: #fafafa;
+}
+
+.telex-centered-price-circle .telex-pricing-currency {
+	font-size: 16px;
+	color: #888;
+	margin-top: 0;
+	align-self: center;
+}
+
+.telex-centered-price-circle .telex-pricing-amount {
+	font-size: 42px;
+	line-height: 1;
+}
+
+.telex-centered-price-circle .telex-pricing-period {
+	font-size: 12px;
+	color: #999;
+}
+
+.telex-centered-price-circle .telex-pricing-discount-badge {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	font-size: 10px;
+	padding: 3px 8px;
+	border-radius: 10px;
+	margin-bottom: 0;
+}
+
+.telex-pricing-features--centered {
+	text-align: left;
+}
+
+.telex-pricing-features--centered .telex-pricing-feature {
+	justify-content: center;
+	border-bottom: 1px dashed #e8e8e8;
+}
+
+.telex-pricing-button--pill {
+	border-radius: 50px !important;
+	padding: 14px 48px;
+	min-width: 180px;
+}
+
+/* ========================================
+   LAYOUT: Side Accent
+   ======================================== */
+.telex-pricing-card--side-accent {
+	border-left: 5px solid;
+	border-top: none;
+	border-right: none;
+	border-bottom: none;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.telex-pricing-card--side-accent:hover {
+	transform: translateX(4px);
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.telex-pricing-card--side-accent.telex-pricing-card--featured {
+	transform: none;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+.telex-pricing-card--side-accent.telex-pricing-card--featured:hover {
+	transform: translateX(4px);
+}
+
+.telex-pricing-card--side-accent .telex-pricing-badge {
+	left: auto;
+	right: 16px;
+	top: -12px;
+	transform: none;
+}
+
+.telex-side-accent-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding: 24px 24px 0;
+	gap: 16px;
+}
+
+.telex-side-accent-title-area {
+	flex: 1;
+}
+
+.telex-side-accent-title-area .telex-pricing-plan-name {
+	font-size: 20px;
+	color: #333;
+}
+
+.telex-side-accent-title-area .telex-pricing-description {
+	color: #888;
+}
+
+.telex-side-accent-price-area {
+	text-align: right;
+	flex-shrink: 0;
+}
+
+.telex-side-accent-price-area .telex-pricing-price-row {
+	justify-content: flex-end;
+}
+
+.telex-side-accent-price-area .telex-pricing-amount {
+	font-size: 36px;
+}
+
+.telex-side-accent-price-area .telex-pricing-currency {
+	font-size: 18px;
+	margin-top: 4px;
+}
+
+.telex-side-accent-price-area .telex-pricing-discount-badge {
+	font-size: 10px;
+	padding: 2px 8px;
+	margin-bottom: 4px;
+}
+
+.telex-side-accent-divider {
+	height: 2px;
+	margin: 16px 24px;
+	opacity: 0.3;
+	border-radius: 1px;
+}
+
+.telex-pricing-card--side-accent .telex-pricing-features {
+	padding: 0 24px 8px;
+}
+
+.telex-pricing-button--outline {
+	background: transparent !important;
+	border: 2px solid;
+	font-weight: 600;
+}
+
+.telex-pricing-button--outline:hover {
+	opacity: 1;
+	filter: brightness(0.9);
+}
+
+/* ========================================
+   LAYOUT: Card Ribbon
+   ======================================== */
+.telex-pricing-card--ribbon {
+	overflow: hidden;
+	border: 1px solid #eee;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.telex-pricing-card--ribbon:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+
+.telex-pricing-card--ribbon.telex-pricing-card--featured {
+	transform: none;
+}
+
+.telex-pricing-card--ribbon.telex-pricing-card--featured:hover {
+	transform: translateY(-6px);
+}
+
+.telex-ribbon-tag {
+	position: absolute;
+	top: 18px;
+	right: -30px;
+	transform: rotate(45deg);
+	color: #ffffff;
+	font-size: 10px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	padding: 4px 40px;
+	z-index: 2;
+}
+
+.telex-ribbon-top-bar {
+	height: 6px;
+	width: 100%;
+}
+
+.telex-ribbon-content {
+	padding: 24px;
+}
+
+.telex-ribbon-plan-info {
+	margin-bottom: 20px;
+}
+
+.telex-ribbon-plan-info .telex-pricing-plan-name {
+	font-size: 20px;
+	color: #333;
+	margin-bottom: 4px;
+}
+
+.telex-ribbon-plan-info .telex-pricing-description {
+	color: #888;
+	margin-bottom: 12px;
+}
+
+.telex-ribbon-price {
+	display: flex;
+	align-items: baseline;
+	gap: 4px;
+}
+
+.telex-ribbon-price .telex-pricing-amount {
+	font-size: 40px;
+}
+
+.telex-ribbon-price .telex-pricing-currency {
+	font-size: 18px;
+	margin-top: 6px;
+}
+
+.telex-ribbon-price .telex-pricing-discount-badge--small {
+	align-self: center;
+	margin-bottom: 0;
+	margin-right: 4px;
+}
+
+.telex-ribbon-features-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 20px;
+	padding-top: 16px;
+	border-top: 1px solid #f0f0f0;
+}
+
+.telex-ribbon-tag-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 6px 14px;
+	border: 1px solid;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	white-space: nowrap;
+	background: transparent;
+}
+
+.telex-ribbon-tag-item--excluded {
+	border-color: #ddd !important;
+	color: #bbb !important;
+	text-decoration: line-through;
+	background: #fafafa;
+}
+
+.telex-pricing-button-area--ribbon {
+	padding: 0;
+}
+
+.telex-pricing-button--wide {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 14px;
+	font-size: 15px;
+}
+
+/* ========================================
+   THEME: Dark
+   ======================================== */
+.telex-theme-dark {
+	.telex-billing-toggle-wrapper {
+		background: #16213e;
+	}
+
+	.telex-billing-option {
+		color: #8892b0;
+	}
+
+	.telex-billing-option:hover {
+		color: #ccd6f6;
+	}
+
+	.telex-billing-option--active {
+		background: #6c63ff;
+		color: #ffffff;
+		box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
+	}
+
+	.telex-pricing-card {
+		background: #1a1a2e;
+		border-color: #2a2a4a;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.telex-pricing-card:hover {
+		box-shadow: 0 8px 40px rgba(108, 99, 255, 0.2);
+		border-color: #6c63ff;
+	}
+
+	.telex-pricing-card--featured {
+		border-color: #6c63ff;
+		box-shadow: 0 6px 30px rgba(108, 99, 255, 0.25);
+	}
+
+	.telex-pricing-card--featured:hover {
+		box-shadow: 0 12px 50px rgba(108, 99, 255, 0.35);
+	}
+
+	.telex-pricing-card--centered {
+		border-color: #2a2a4a;
+	}
+
+	.telex-centered-price-circle {
+		background: #16213e;
+	}
+
+	.telex-pricing-card--side-accent {
+		border-color: transparent;
+		border-left-style: solid;
+	}
+
+	.telex-pricing-card--ribbon {
+		border-color: #2a2a4a;
+	}
+
+	.telex-pricing-currency {
+		color: #8892b0;
+	}
+
+	.telex-pricing-amount {
+		color: #ffffff;
+	}
+
+	.telex-pricing-period {
+		color: #8892b0;
+	}
+
+	.telex-pricing-feature {
+		color: #ccd6f6;
+		border-bottom-color: #2a2a4a;
+	}
+
+	.telex-pricing-feature--excluded {
+		color: #4a4a6a;
+	}
+
+	.telex-feature-icon--check {
+		background: rgba(108, 99, 255, 0.15);
+		color: #6c63ff;
+	}
+
+	.telex-feature-icon--cross {
+		background: rgba(255, 107, 107, 0.15);
+		color: #ff6b6b;
+	}
+
+	.telex-pricing-discount-badge {
+		background: #6c63ff;
+	}
+
+	.telex-pricing-button {
+		box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+	}
+
+	.telex-pricing-button:hover {
+		box-shadow: 0 6px 25px rgba(108, 99, 255, 0.5);
+	}
+
+	.telex-pricing-button--outline {
+		box-shadow: none;
+	}
+
+	.telex-side-accent-title-area .telex-pricing-plan-name,
+	.telex-ribbon-plan-info .telex-pricing-plan-name {
+		color: #ffffff;
+	}
+
+	.telex-side-accent-title-area .telex-pricing-description,
+	.telex-ribbon-plan-info .telex-pricing-description,
+	.telex-centered-top .telex-pricing-description {
+		color: #8892b0;
+	}
+
+	.telex-side-accent-divider {
+		opacity: 0.5;
+	}
+
+	.telex-ribbon-features-tags {
+		border-top-color: #2a2a4a;
+	}
+
+	.telex-ribbon-tag-item--excluded {
+		border-color: #3a3a5a !important;
+		color: #5a5a7a !important;
+		background: #1e1e3e;
+	}
+}
+
+/* ========================================
+   THEME: Gradient
+   ======================================== */
+.telex-theme-gradient {
+	.telex-billing-toggle-wrapper {
+		background: linear-gradient(135deg, #e0e7ff 0%, #f5e6ff 100%);
+	}
+
+	.telex-billing-option {
+		color: #764ba2;
+	}
+
+	.telex-billing-option:hover {
+		color: #667eea;
+	}
+
+	.telex-billing-option--active {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: #ffffff;
+		box-shadow: 0 2px 12px rgba(102, 126, 234, 0.35);
+	}
+
+	.telex-pricing-card {
+		background: #ffffff;
+		border-color: #e8e0f0;
+		box-shadow: 0 4px 20px rgba(118, 75, 162, 0.08);
+	}
+
+	.telex-pricing-card:hover {
+		box-shadow: 0 8px 35px rgba(118, 75, 162, 0.18);
+	}
+
+	.telex-pricing-card--featured {
+		box-shadow: 0 6px 30px rgba(240, 147, 251, 0.2);
+	}
+
+	.telex-pricing-card--featured:hover {
+		box-shadow: 0 12px 45px rgba(240, 147, 251, 0.3);
+	}
+
+	.telex-pricing-header {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	}
+
+	.telex-pricing-card--featured .telex-pricing-header {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+	}
+
+	.telex-pricing-currency {
+		color: #764ba2;
+	}
+
+	.telex-pricing-amount {
+		color: #333;
+	}
+
+	.telex-pricing-period {
+		color: #999;
+	}
+
+	.telex-pricing-feature {
+		border-bottom-color: #f0ecf5;
+	}
+
+	.telex-feature-icon--check {
+		background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+		color: #667eea;
+	}
+
+	.telex-feature-icon--cross {
+		background: rgba(245, 87, 108, 0.1);
+		color: #f5576c;
+	}
+
+	.telex-pricing-discount-badge {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	}
+
+	.telex-pricing-badge {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+	}
+
+	.telex-pricing-button {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+		box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+	}
+
+	.telex-pricing-card--featured .telex-pricing-button {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+		box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+	}
+
+	.telex-pricing-button:hover {
+		box-shadow: 0 6px 25px rgba(102, 126, 234, 0.45);
+	}
+
+	.telex-pricing-button--outline {
+		background: transparent !important;
+		box-shadow: none;
+	}
+
+	.telex-centered-price-circle {
+		background: linear-gradient(135deg, #f8f6ff 0%, #fff5fb 100%);
+	}
+
+	.telex-ribbon-top-bar {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+	}
+
+	.telex-pricing-card--featured .telex-ribbon-top-bar {
+		background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+	}
+}
+
+/* ========================================
+   THEME: Minimal
+   ======================================== */
+.telex-theme-minimal {
+	.telex-billing-toggle-wrapper {
+		background: #f1f3f5;
+		border-radius: 8px;
+	}
+
+	.telex-billing-option {
+		color: #868e96;
+		border-radius: 6px;
+		font-weight: 500;
+	}
+
+	.telex-billing-option:hover {
+		color: #495057;
+	}
+
+	.telex-billing-option--active {
+		background: #2d3436;
+		color: #ffffff;
+		box-shadow: none;
+	}
+
+	.telex-pricing-card {
+		background: #ffffff;
+		border: 1px solid #e9ecef;
+		box-shadow: none;
+		border-radius: 8px !important;
+	}
+
+	.telex-pricing-card:hover {
+		transform: none;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+		border-color: #00b894;
+	}
+
+	.telex-pricing-card--featured {
+		transform: none;
+		border-color: #00b894;
+		border-width: 2px;
+		box-shadow: none;
+	}
+
+	.telex-pricing-card--featured:hover {
+		transform: none;
+		box-shadow: 0 4px 20px rgba(0, 184, 148, 0.12);
+	}
+
+	.telex-pricing-card--side-accent {
+		border: none;
+		border-left: 5px solid;
+	}
+
+	.telex-pricing-card--side-accent:hover {
+		transform: translateX(4px);
+	}
+
+	.telex-pricing-header {
+		background: #f7f8fc !important;
+		border-bottom: 1px solid #e9ecef;
+	}
+
+	.telex-pricing-card--featured .telex-pricing-header {
+		background: #e6fff9 !important;
+	}
+
+	.telex-pricing-plan-name {
+		color: #2d3436;
+	}
+
+	.telex-pricing-description {
+		color: #868e96;
+	}
+
+	.telex-pricing-currency {
+		color: #868e96;
+	}
+
+	.telex-pricing-amount {
+		color: #2d3436;
+		font-weight: 700;
+	}
+
+	.telex-pricing-period {
+		color: #adb5bd;
+	}
+
+	.telex-pricing-feature {
+		color: #495057;
+		border-bottom-color: #f1f3f5;
+	}
+
+	.telex-pricing-feature--excluded {
+		color: #ced4da;
+	}
+
+	.telex-feature-icon--check {
+		background: #e6fff9;
+		color: #00b894;
+	}
+
+	.telex-feature-icon--cross {
+		background: #fff0f0;
+		color: #e17055;
+	}
+
+	.telex-pricing-discount-badge {
+		background: #00b894;
+		border-radius: 4px;
+	}
+
+	.telex-pricing-badge {
+		border-radius: 4px !important;
+	}
+
+	.telex-pricing-button {
+		border-radius: 6px !important;
+		font-weight: 600;
+		box-shadow: none;
+	}
+
+	.telex-pricing-button:hover {
+		opacity: 0.9;
+		transform: none;
+	}
+
+	.telex-pricing-button--outline {
+		background: transparent !important;
+	}
+
+	.telex-centered-price-circle {
+		background: #f7f8fc;
+	}
+
+	.telex-ribbon-tag-item--excluded {
+		background: #f8f9fa;
+	}
+}
+
+@media (max-width: 768px) {
+	.telex-pricing-table-grid {
+		grid-template-columns: 1fr !important;
+	}
+
+	.telex-pricing-card--featured {
+		transform: none;
+	}
+
+	.telex-pricing-card--featured:hover {
+		transform: translateY(-4px);
+	}
+
+	.telex-theme-minimal .telex-pricing-card--featured:hover {
+		transform: none;
+	}
+
+	.telex-side-accent-header {
+		flex-direction: column;
+	}
+
+	.telex-side-accent-price-area {
+		text-align: left;
+	}
+
+	.telex-side-accent-price-area .telex-pricing-price-row {
+		justify-content: flex-start;
+	}
+}
+
+@media (max-width: 1024px) and (min-width: 769px) {
+	.telex-pricing-table-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+}
+]]></content>
+  </file>
+  <file path="src/editor.scss">
+    <description>Editor-only styles.</description>
+    <content><![CDATA[
+.wp-block-telex-block-telex-pricing-table {
+	border: none;
+
+	.telex-pricing-button {
+		pointer-events: none;
+	}
+}
+]]></content>
+  </file>
+  <file path="src/view.js">
+    <description>Frontend view script for hover animations on pricing cards.</description>
+    <content><![CDATA[
+( function () {
+	'use strict';
+
+	document.addEventListener( 'DOMContentLoaded', function () {
+		var wrappers = document.querySelectorAll( '.telex-pricing-table-wrapper' );
+
+		wrappers.forEach( function ( wrapper ) {
+			var toggleButtons = wrapper.querySelectorAll( '.telex-billing-option' );
+			var cards = wrapper.querySelectorAll( '.telex-pricing-card' );
+
+			function switchBilling( billingKey ) {
+				toggleButtons.forEach( function ( btn ) {
+					btn.classList.remove( 'telex-billing-option--active' );
+					if ( btn.getAttribute( 'data-billing' ) === billingKey ) {
+						btn.classList.add( 'telex-billing-option--active' );
+					}
+				} );
+
+				cards.forEach( function ( card ) {
+					var pricingRaw = card.getAttribute( 'data-pricing' );
+					if ( ! pricingRaw ) return;
+
+					var pricing;
+					try {
+						pricing = JSON.parse( pricingRaw );
+					} catch ( e ) {
+						return;
+					}
+
+					var data = pricing[ billingKey ];
+					if ( ! data ) return;
+
+					var amountEl = card.querySelector( '.telex-pricing-amount' );
+					var periodEl = card.querySelector( '.telex-pricing-period' );
+					var discountBadge = card.querySelector( '.telex-pricing-discount-badge' );
+
+					if ( amountEl ) {
+						amountEl.textContent = data.price || '0';
+					}
+					if ( periodEl ) {
+						periodEl.textContent = data.period || '';
+					}
+					if ( discountBadge ) {
+						if ( data.discount && data.discount !== '' ) {
+							discountBadge.textContent = data.discount + '% OFF';
+							discountBadge.style.display = '';
+						} else {
+							discountBadge.style.display = 'none';
+						}
+					}
+				} );
+			}
+
+			toggleButtons.forEach( function ( btn ) {
+				btn.addEventListener( 'click', function () {
+					var billingKey = btn.getAttribute( 'data-billing' );
+					switchBilling( billingKey );
+				} );
+			} );
+
+			cards.forEach( function ( card ) {
+				card.addEventListener( 'mouseenter', function () {
+					card.classList.add( 'telex-pricing-card--hover' );
+				} );
+				card.addEventListener( 'mouseleave', function () {
+					card.classList.remove( 'telex-pricing-card--hover' );
+				} );
+			} );
+		} );
+	} );
+} )();
+]]></content>
+  </file>
+  <file path="src/render.php">
+    <description>Render callback — not used for this static block.</description>
+    <content><![CDATA[]]></content>
+  </file>
+  <file path="package.json">
+    <description>Package configuration for the block plugin.</description>
+    <content><![CDATA[
+  {
+	"name": "telex-pricing-table",
+	"version": "0.1.0",
+	"description": "A beautiful, fully customizable pricing table block with multiple plans, feature lists, CTA buttons, and featured plan highlighting.",
+	"author": "WordPress Telex",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+    "devDependencies": {
+        "@wordpress/scripts": "^30.15.0"
+	}
+}
+]]></content>
+  </file>
+</artefact>

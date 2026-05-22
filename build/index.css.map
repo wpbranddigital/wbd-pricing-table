@@ -1,0 +1,1 @@
+{"version":3,"file":"index.css","mappings":";;;AAAA;EACE;AACF;AACE;EACE;AACJ,C","sources":["webpack://wbd-pricing-table/./src/editor.scss"],"sourcesContent":[".wp-block-wbdpt-wbd-pricing-table {\n  border: none;\n\n  .telex-pricing-button {\n    pointer-events: none;\n  }\n}\n"],"names":[],"sourceRoot":""}

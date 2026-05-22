@@ -1,0 +1,347 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "wbdpt/wbd-pricing-table",
+  "version": "1.1.2",
+  "title": "Pricing Table",
+  "category": "widgets",
+  "icon": "editor-table",
+  "description": "A beautiful, fully customizable pricing table block with multiple plans, feature lists, CTA buttons, and featured plan highlighting.",
+  "example": {
+    "attributes": {
+      "plans": [
+        {
+          "name": "Basic",
+          "description": "For individuals",
+          "currency": "$",
+          "features": [
+            {
+              "text": "1 Website",
+              "included": true
+            },
+            {
+              "text": "10 GB Storage",
+              "included": true
+            },
+            {
+              "text": "Email Support",
+              "included": true
+            },
+            {
+              "text": "Priority Support",
+              "included": false
+            }
+          ],
+          "buttonText": "Get Started",
+          "buttonUrl": "#",
+          "featured": false,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "9",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "86",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        },
+        {
+          "name": "Pro",
+          "description": "For professionals",
+          "currency": "$",
+          "features": [
+            {
+              "text": "10 Websites",
+              "included": true
+            },
+            {
+              "text": "50 GB Storage",
+              "included": true
+            },
+            {
+              "text": "Email Support",
+              "included": true
+            },
+            {
+              "text": "Priority Support",
+              "included": true
+            }
+          ],
+          "buttonText": "Get Started",
+          "buttonUrl": "#",
+          "featured": true,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "29",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "278",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        },
+        {
+          "name": "Enterprise",
+          "description": "For large teams",
+          "currency": "$",
+          "features": [
+            {
+              "text": "Unlimited Websites",
+              "included": true
+            },
+            {
+              "text": "500 GB Storage",
+              "included": true
+            },
+            {
+              "text": "24/7 Support",
+              "included": true
+            },
+            {
+              "text": "Priority Support",
+              "included": true
+            }
+          ],
+          "buttonText": "Contact Us",
+          "buttonUrl": "#",
+          "featured": false,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "99",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "950",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        }
+      ],
+      "columns": 3,
+      "showBillingToggle": true,
+      "billingOptions": [
+        {
+          "key": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "key": "yearly",
+          "label": "Yearly"
+        }
+      ],
+      "defaultBillingOption": "monthly"
+    }
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "wide"
+    },
+    "plans": {
+      "type": "array",
+      "default": [
+        {
+          "name": "Basic",
+          "description": "Perfect for getting started",
+          "currency": "$",
+          "features": [
+            {
+              "text": "1 Website",
+              "included": true
+            },
+            {
+              "text": "10 GB Storage",
+              "included": true
+            },
+            {
+              "text": "Email Support",
+              "included": true
+            },
+            {
+              "text": "Priority Support",
+              "included": false
+            }
+          ],
+          "buttonText": "Get Started",
+          "buttonUrl": "#",
+          "featured": false,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "9",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "86",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        },
+        {
+          "name": "Pro",
+          "description": "Best for professionals",
+          "currency": "$",
+          "features": [
+            {
+              "text": "10 Websites",
+              "included": true
+            },
+            {
+              "text": "50 GB Storage",
+              "included": true
+            },
+            {
+              "text": "Email Support",
+              "included": true
+            },
+            {
+              "text": "Priority Support",
+              "included": true
+            }
+          ],
+          "buttonText": "Get Started",
+          "buttonUrl": "#",
+          "featured": true,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "29",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "278",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        },
+        {
+          "name": "Enterprise",
+          "description": "For large teams and businesses",
+          "currency": "$",
+          "features": [
+            {
+              "text": "Unlimited Websites",
+              "included": true
+            },
+            {
+              "text": "500 GB Storage",
+              "included": true
+            },
+            {
+              "text": "24/7 Phone Support",
+              "included": true
+            },
+            {
+              "text": "Dedicated Manager",
+              "included": true
+            }
+          ],
+          "buttonText": "Contact Us",
+          "buttonUrl": "#",
+          "featured": false,
+          "openInNewTab": false,
+          "pricing": {
+            "monthly": {
+              "price": "99",
+              "period": "/mo",
+              "discount": ""
+            },
+            "yearly": {
+              "price": "950",
+              "period": "/yr",
+              "discount": "20"
+            }
+          }
+        }
+      ]
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "showBillingToggle": {
+      "type": "boolean",
+      "default": true
+    },
+    "billingOptions": {
+      "type": "array",
+      "default": [
+        {
+          "key": "monthly",
+          "label": "Monthly"
+        },
+        {
+          "key": "yearly",
+          "label": "Yearly"
+        }
+      ]
+    },
+    "defaultBillingOption": {
+      "type": "string",
+      "default": "monthly"
+    },
+    "headerBgColor": {
+      "type": "string",
+      "default": "#4a90d9"
+    },
+    "headerTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonBgColor": {
+      "type": "string",
+      "default": "#4a90d9"
+    },
+    "buttonTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "featuredAccentColor": {
+      "type": "string",
+      "default": "#e85e5e"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 12
+    },
+    "featuredBadgeText": {
+      "type": "string",
+      "default": "Recommended"
+    },
+    "styleTheme": {
+      "type": "string",
+      "default": "default"
+    },
+    "layoutStyle": {
+      "type": "string",
+      "default": "flat-border"
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "textdomain": "wbd-pricing-tables",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

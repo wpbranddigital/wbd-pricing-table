@@ -1,0 +1,1068 @@
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+.wp-block-wbdpt-wbd-pricing-table {
+  padding: 0;
+  background: transparent;
+  color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-table-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-billing-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 32px;
+  background: #f0f0f0;
+  border-radius: 50px;
+  padding: 4px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-billing-option {
+  padding: 10px 28px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-billing-option:hover {
+  color: #333;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-billing-option--active {
+  background: #ffffff;
+  color: #222;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-table-grid {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Classic (default)
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card {
+  position: relative;
+  background: #ffffff;
+  border: 2px solid transparent;
+  overflow: visible;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.14);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--featured {
+  transform: scale(1.04);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--featured:hover {
+  transform: scale(1.04) translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 18px;
+  border-radius: 20px;
+  white-space: nowrap;
+  z-index: 2;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-header {
+  padding: 28px 20px 18px;
+  text-align: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-plan-name {
+  margin: 0 0 4px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-description {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.85;
+  color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-price-area {
+  text-align: center;
+  padding: 24px 20px 16px;
+  position: relative;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-discount-badge {
+  display: inline-block;
+  background: #27ae60;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 3px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-discount-badge--small {
+  font-size: 10px;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-currency {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  align-self: flex-start;
+  margin-top: 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-amount {
+  font-size: 52px;
+  font-weight: 800;
+  color: #222;
+  line-height: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-period {
+  font-size: 15px;
+  color: #777;
+  font-weight: 400;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features {
+  list-style: none;
+  margin: 0;
+  padding: 0 24px 8px;
+  flex-grow: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #444;
+  border-bottom: 1px solid #f0f0f0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature:last-child {
+  border-bottom: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature--excluded {
+  color: #aaa;
+  text-decoration: line-through;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-feature-icon--check {
+  background: #e6f7ee;
+  color: #27ae60;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-feature-icon--cross {
+  background: #fde8e8;
+  color: #d64545;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button-area {
+  padding: 16px 24px 28px;
+  text-align: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button {
+  display: inline-block;
+  padding: 12px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  border: none;
+  min-width: 140px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+.wp-block-wbdpt-wbd-pricing-table a.telex-pricing-button {
+  color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Centered
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--centered {
+  text-align: center;
+  padding-top: 32px;
+  border: 2px solid #eee;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--centered.telex-pricing-card--featured {
+  border-color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-top {
+  padding: 0 24px 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-top .telex-pricing-plan-name {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-top .telex-pricing-description {
+  color: #888;
+  margin-bottom: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-price-circle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid;
+  margin: 20px auto;
+  position: relative;
+  background: #fafafa;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-price-circle .telex-pricing-currency {
+  font-size: 16px;
+  color: #888;
+  margin-top: 0;
+  align-self: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-price-circle .telex-pricing-amount {
+  font-size: 42px;
+  line-height: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-price-circle .telex-pricing-period {
+  font-size: 12px;
+  color: #999;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-centered-price-circle .telex-pricing-discount-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-bottom: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--centered {
+  text-align: left;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--centered .telex-pricing-feature {
+  justify-content: center;
+  border-bottom: 1px dashed #e8e8e8;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button--pill {
+  border-radius: 50px !important;
+  padding: 14px 48px;
+  min-width: 180px;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Side Accent
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent {
+  border-left: 5px solid;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent.telex-pricing-card--featured {
+  transform: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent.telex-pricing-card--featured:hover {
+  transform: translateX(4px);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent .telex-pricing-badge {
+  left: auto;
+  right: 16px;
+  top: -12px;
+  transform: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 24px 24px 0;
+  gap: 16px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-title-area {
+  flex: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-title-area .telex-pricing-plan-name {
+  font-size: 20px;
+  color: #333;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-title-area .telex-pricing-description {
+  color: #888;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area {
+  text-align: right;
+  flex-shrink: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area .telex-pricing-price-row {
+  justify-content: flex-end;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area .telex-pricing-amount {
+  font-size: 36px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area .telex-pricing-currency {
+  font-size: 18px;
+  margin-top: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area .telex-pricing-discount-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  margin-bottom: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-side-accent-divider {
+  height: 2px;
+  margin: 16px 24px;
+  opacity: 0.3;
+  border-radius: 1px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--side-accent .telex-pricing-features {
+  padding: 0 24px 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button--outline {
+  background: transparent !important;
+  border: 2px solid;
+  font-weight: 600;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button--outline:hover {
+  opacity: 1;
+  filter: brightness(0.9);
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Card Ribbon
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--ribbon {
+  overflow: hidden;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--ribbon:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.14);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--ribbon.telex-pricing-card--featured {
+  transform: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--ribbon.telex-pricing-card--featured:hover {
+  transform: translateY(-6px);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-tag {
+  position: absolute;
+  top: 40px;
+  right: -30px;
+  transform: rotate(45deg);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 40px;
+  z-index: 2;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-top-bar {
+  height: 6px;
+  width: 100%;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-content {
+  padding: 24px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-plan-info {
+  margin-bottom: 20px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-plan-info .telex-pricing-plan-name {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-plan-info .telex-pricing-description {
+  color: #888;
+  margin-bottom: 12px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-price .telex-pricing-amount {
+  font-size: 40px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-price .telex-pricing-currency {
+  font-size: 18px;
+  margin-top: 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-price .telex-pricing-discount-badge--small {
+  align-self: center;
+  margin-bottom: 0;
+  margin-right: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-features-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border: 1px solid;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: transparent;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-ribbon-tag-item--excluded {
+  border-color: #ddd !important;
+  color: #bbb !important;
+  text-decoration: line-through;
+  background: #fafafa;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button-area--ribbon {
+  padding: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button--wide {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  font-size: 15px;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Banner
+   Pentagon/shield shaped header with bold
+   centered price. Inspired by screenshot-8.
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner {
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.16);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner.telex-pricing-card--featured {
+  transform: scale(1.04);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner.telex-pricing-card--featured:hover {
+  transform: scale(1.04) translateY(-5px);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-header {
+  position: relative;
+  text-align: center;
+  padding: 32px 24px 60px;
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-header .telex-pricing-plan-name {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-header .telex-pricing-description {
+  font-size: 13px;
+  opacity: 0.85;
+  margin: 0 0 16px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-price-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-price-row .telex-pricing-price-row {
+  justify-content: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-price-row .telex-pricing-currency {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-price-row .telex-pricing-amount {
+  font-size: 56px;
+  font-weight: 800;
+  line-height: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-period {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.8;
+  display: block;
+  margin-top: 2px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-banner-discount {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--banner {
+  list-style: none;
+  margin: 0;
+  padding: 20px 24px 8px;
+  flex-grow: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--banner .telex-pricing-feature {
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+  color: #555;
+  font-size: 14px;
+  padding: 11px 0;
+  gap: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--banner .telex-pricing-feature .telex-feature-icon {
+  display: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--banner .telex-pricing-feature:last-child {
+  border-bottom: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--banner .telex-pricing-feature--excluded {
+  color: #c0c0c0;
+  text-decoration: line-through;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-button--banner {
+  display: inline-block;
+  padding: 13px 36px;
+  font-size: 15px;
+  font-weight: 700;
+  min-width: 160px;
+  text-align: center;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   LAYOUT: Flat Border
+   Clean flat cards; featured plan gets a
+   solid colored border all-around.
+   Inspired by screenshot-7.
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border {
+  border: 2px solid #e0e0e0;
+  box-shadow: none;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border.telex-pricing-card--featured {
+  border-width: 2px;
+  transform: none;
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border.telex-pricing-card--featured:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-header {
+  padding: 28px 24px 8px;
+  text-align: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-header .telex-pricing-plan-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area {
+  text-align: center;
+  padding: 12px 24px 20px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area .telex-pricing-price-row {
+  justify-content: center;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area .telex-pricing-currency {
+  font-size: 20px;
+  font-weight: 500;
+  color: #999;
+  margin-top: 6px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area .telex-pricing-amount {
+  font-size: 48px;
+  font-weight: 700;
+  color: #333;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area .telex-pricing-period {
+  display: block;
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-flat-price-area .telex-pricing-discount-badge {
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--flat {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature--flat {
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  padding: 12px 24px;
+  border-bottom: none;
+  background: #f7f7f7;
+  gap: 0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature--flat:nth-child(even) {
+  background: #ffffff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-feature--flat.telex-pricing-feature--excluded {
+  color: #c0c0c0;
+  text-decoration: line-through;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-features--flat .telex-feature-icon {
+  display: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border .telex-pricing-button-area {
+  padding: 20px 24px 28px;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   THEME: Dark
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-billing-toggle-wrapper {
+  background: #16213e;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-billing-option {
+  color: #8892b0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-billing-option:hover {
+  color: #ccd6f6;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-billing-option--active {
+  background: #6c63ff;
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(108, 99, 255, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card {
+  background: #1a1a2e;
+  border-color: #2a2a4a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card:hover {
+  box-shadow: 0 8px 40px rgba(108, 99, 255, 0.2);
+  border-color: #6c63ff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--featured {
+  border-color: #6c63ff;
+  box-shadow: 0 6px 30px rgba(108, 99, 255, 0.25);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--featured:hover {
+  box-shadow: 0 12px 50px rgba(108, 99, 255, 0.35);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--centered {
+  border-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-centered-price-circle {
+  background: #16213e;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--side-accent {
+  border-color: transparent;
+  border-left-style: solid;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--ribbon {
+  border-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--banner {
+  background: #1a1a2e;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--flat-border {
+  background: #1a1a2e;
+  border-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-card--flat-border.telex-pricing-card--featured {
+  border-color: inherit;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-feature--flat {
+  background: #16213e;
+  color: #ccd6f6;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-feature--flat:nth-child(even) {
+  background: #1a1a2e;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-currency {
+  color: #8892b0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-amount {
+  color: #ffffff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-period {
+  color: #8892b0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-feature {
+  color: #ccd6f6;
+  border-bottom-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-feature--excluded {
+  color: #4a4a6a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-feature-icon--check {
+  background: rgba(108, 99, 255, 0.15);
+  color: #6c63ff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-feature-icon--cross {
+  background: rgba(255, 107, 107, 0.15);
+  color: #ff6b6b;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-discount-badge {
+  background: #6c63ff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-button {
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-button:hover {
+  box-shadow: 0 6px 25px rgba(108, 99, 255, 0.5);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-button--outline {
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-side-accent-title-area .telex-pricing-plan-name,
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-ribbon-plan-info .telex-pricing-plan-name {
+  color: #ffffff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-side-accent-title-area .telex-pricing-description,
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-ribbon-plan-info .telex-pricing-description,
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-centered-top .telex-pricing-description {
+  color: #8892b0;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-side-accent-divider {
+  opacity: 0.5;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-ribbon-features-tags {
+  border-top-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-ribbon-tag-item--excluded {
+  border-color: #3a3a5a !important;
+  color: #5a5a7a !important;
+  background: #1e1e3e;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-pricing-features--banner .telex-pricing-feature {
+  color: #ccd6f6;
+  border-bottom-color: #2a2a4a;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-flat-price-area .telex-pricing-amount {
+  color: #ffffff;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-dark .telex-flat-price-area .telex-pricing-currency {
+  color: #8892b0;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   THEME: Gradient
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-billing-toggle-wrapper {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f5e6ff 100%);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-billing-option {
+  color: #764ba2;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-billing-option:hover {
+  color: #667eea;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-billing-option--active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 12px rgba(102, 126, 234, 0.35);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card {
+  background: #ffffff;
+  border-color: #e8e0f0;
+  box-shadow: 0 4px 20px rgba(118, 75, 162, 0.08);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card:hover {
+  box-shadow: 0 8px 35px rgba(118, 75, 162, 0.18);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card--featured {
+  box-shadow: 0 6px 30px rgba(240, 147, 251, 0.2);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card--featured:hover {
+  box-shadow: 0 12px 45px rgba(240, 147, 251, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card--featured .telex-pricing-header {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-currency {
+  color: #764ba2;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-amount {
+  color: #333;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-period {
+  color: #999;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-feature {
+  border-bottom-color: #f0ecf5;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-feature-icon--check {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+  color: #667eea;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-feature-icon--cross {
+  background: rgba(245, 87, 108, 0.1);
+  color: #f5576c;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-discount-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-badge {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card--featured .telex-pricing-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+  box-shadow: 0 4px 15px rgba(240, 147, 251, 0.3);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-button:hover {
+  box-shadow: 0 6px 25px rgba(102, 126, 234, 0.45);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-button--outline {
+  background: transparent !important;
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-centered-price-circle {
+  background: linear-gradient(135deg, #f8f6ff 0%, #fff5fb 100%);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-ribbon-top-bar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-gradient .telex-pricing-card--featured .telex-ribbon-top-bar {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   THEME: Minimal
+   ======================================== */
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-billing-toggle-wrapper {
+  background: #f1f3f5;
+  border-radius: 8px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-billing-option {
+  color: #868e96;
+  border-radius: 6px;
+  font-weight: 500;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-billing-option:hover {
+  color: #495057;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-billing-option--active {
+  background: #2d3436;
+  color: #ffffff;
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  box-shadow: none;
+  border-radius: 8px !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card:hover {
+  transform: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border-color: #00b894;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--featured {
+  transform: none;
+  border-color: #00b894;
+  border-width: 2px;
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--featured:hover {
+  transform: none;
+  box-shadow: 0 4px 20px rgba(0, 184, 148, 0.12);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--side-accent {
+  border: none;
+  border-left: 5px solid;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--side-accent:hover {
+  transform: translateX(4px);
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-header {
+  background: #f7f8fc !important;
+  border-bottom: 1px solid #e9ecef;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--featured .telex-pricing-header {
+  background: #e6fff9 !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-plan-name {
+  color: #2d3436;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-description {
+  color: #868e96;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-currency {
+  color: #868e96;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-amount {
+  color: #2d3436;
+  font-weight: 700;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-period {
+  color: #adb5bd;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-feature {
+  color: #495057;
+  border-bottom-color: #f1f3f5;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-feature--excluded {
+  color: #ced4da;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-feature-icon--check {
+  background: #e6fff9;
+  color: #00b894;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-feature-icon--cross {
+  background: #fff0f0;
+  color: #e17055;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-discount-badge {
+  background: #00b894;
+  border-radius: 4px;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-badge {
+  border-radius: 4px !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-button {
+  border-radius: 6px !important;
+  font-weight: 600;
+  box-shadow: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-button:hover {
+  opacity: 0.9;
+  transform: none;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-button--outline {
+  background: transparent !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-centered-price-circle {
+  background: #f7f8fc;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-ribbon-tag-item--excluded {
+  background: #f8f9fa;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--flat-border {
+  border-radius: 8px !important;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-feature--flat {
+  background: #f8f9fa;
+}
+.wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-feature--flat:nth-child(even) {
+  background: #ffffff;
+}
+.wp-block-wbdpt-wbd-pricing-table {
+  /* ========================================
+   Responsive
+   ======================================== */
+}
+@media (max-width: 768px) {
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-table-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--featured {
+    transform: none;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--featured:hover {
+    transform: translateY(-4px);
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-theme-minimal .telex-pricing-card--featured:hover {
+    transform: none;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-side-accent-header {
+    flex-direction: column;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area {
+    text-align: left;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-side-accent-price-area .telex-pricing-price-row {
+    justify-content: flex-start;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner.telex-pricing-card--featured,
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border.telex-pricing-card--featured {
+    transform: none;
+  }
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--banner.telex-pricing-card--featured:hover,
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-card--flat-border.telex-pricing-card--featured:hover {
+    transform: translateY(-4px);
+  }
+}
+@media (max-width: 1024px) and (min-width: 769px) {
+  .wp-block-wbdpt-wbd-pricing-table .telex-pricing-table-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/*# sourceMappingURL=style-index.css.map*/

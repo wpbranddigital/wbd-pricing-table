@@ -1,0 +1,21 @@
+
+  {
+	"name": "wbd-pricing-table",
+	"version": "1.1.2",
+	"description": "A beautiful, fully customizable pricing table block with multiple plans, feature lists, CTA buttons, and featured plan highlighting.",
+	"author": "WPBrand Digital",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"packages-update": "wp-scripts packages-update",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"start": "wp-scripts start"
+	},
+    "devDependencies": {
+        "@wordpress/scripts": "^30.15.0"
+	}
+}
