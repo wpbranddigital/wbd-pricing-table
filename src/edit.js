@@ -571,14 +571,6 @@ export default function Edit({ attributes, setAttributes }) {
   return (
     <>
       <InspectorControls>
-		{/* HELP & SUPPORT */}
-				<PanelBody title="Help & Support">
-					<p style={{ marginBottom: '10px' }}>Thank you for using WBD Pricing Tables! If you enjoy this plugin, please consider rating it. Need help? Reach out to our support team.</p>
-					<div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-						<Button isPrimary onClick={() => window.open(rateLink, '_blank')}>Rate Plugin</Button>
-						<Button isPrimary onClick={() => window.open(pageLink, '_blank')}>Contact Support</Button>
-					</div>
-				</PanelBody>
         <PanelBody
           title={__("Layout Style", "wbd-pricing-tables")}
           initialOpen={true}

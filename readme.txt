@@ -121,7 +121,7 @@ Yes, the pricing table is fully responsive and adapts to all screen sizes.
 
 The uncompiled source code for this plugin is fully open-source and publicly accessible.
 
-* **Source Code Repository:** https://github.com/Prosantaroy1/pricing-block
+* **Source Code Repository:** https://github.com/wpbranddigital/wbd-pricing-table
 * **Source Folder:** The human-readable and modifiable source files are included in the `/src` directory of the plugin.
 
 Build tools and environment:
